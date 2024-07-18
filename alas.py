@@ -587,6 +587,7 @@ class AzurLaneAutoScript:
             task = self.get_next_task()
             # Init device and change server
             _ = self.device
+            self.device.config = self.config
 
             # Skip first restart
             if task == 'Restart':
