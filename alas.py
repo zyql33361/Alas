@@ -165,6 +165,30 @@ class AzurLaneAutoScript:
                     content=f"<{self.config_name}> RequestHumanTakeover",
                 )
                 exit(1)
+        except MapWalkError as e:
+            if self.AutoRestart_Enabled and self.GameRestartBecauseErrorTimes <= self.AutoRestart_AttemptsToRestart:
+                if self.AutoRestart_NotifyWhenAutoRestart:
+                    handle_notify(
+                        self.config.Error_OnePushConfig,
+                        title=f"Alas <{self.config_name}> crashed",
+                        content=f"<{self.config_name}> Exception occured",
+                    )
+                self.config.task_call('Restart')
+                self.GameRestartBecauseErrorTimes += 1
+                logger.critical(f'left Restart Time: {self.AutoRestart_AttemptsToRestart-self.GameRestartBecauseErrorTimes}')
+                self.device.sleep(10)
+                return False
+            else:
+                self.GameRestartBecauseErrorTimes = 0
+                logger.critical('MapWalkError')
+                logger.exception(e)
+                self.save_error_log()
+                handle_notify(
+                    self.config.Error_OnePushConfig,
+                    title=f"Alas <{self.config_name}> crashed",
+                    content=f"<{self.config_name}> Exception occured",
+                )
+                exit(1)                
         except AutoSearchSetError:
             logger.critical('Auto search could not be set correctly. Maybe your ships in hard mode are changed.')
             logger.critical('Request human takeover.')
