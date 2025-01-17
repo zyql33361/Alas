@@ -83,7 +83,7 @@ def _server_support():
 
 
 def _server_support_dossier_auto_attack():
-    return server.server in ['cn']
+    return server.server in ['cn', 'en']
 
 
 class OpsiAshBeacon(Meta):
@@ -246,7 +246,7 @@ class OpsiAshBeacon(Meta):
         In beacon:
             ask for help if needed
         In dossier:
-            [cn]: auto attack if needed
+            ['cn', 'en']: auto attack if needed
             others: do nothing this version
         """
         # Page beacon or dossier
