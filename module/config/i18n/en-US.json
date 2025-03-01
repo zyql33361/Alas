@@ -496,6 +496,10 @@
     "ScreenshotLength": {
       "name": "Record Screenshot(s)",
       "help": "Number of screenshots saved when exception occurs"
+    },
+    "PauseMinutes": {
+      "name": "Delayed login time after being kicked off (minutes)",
+      "help": "Minimum 10 minutes"
     }
   },
   "Optimization": {

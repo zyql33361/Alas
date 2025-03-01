@@ -496,6 +496,10 @@
     "ScreenshotLength": {
       "name": "Error.ScreenshotLength.name",
       "help": "Error.ScreenshotLength.help"
+    },
+    "PauseMinutes": {
+      "name": "Error.PauseMinutes.name",
+      "help": "Error.PauseMinutes.help"
     }
   },
   "Optimization": {

@@ -496,6 +496,10 @@
     "ScreenshotLength": {
       "name": "出错时，保留最后 X 张截图",
       "help": ""
+    },
+    "PauseMinutes": {
+      "name": "被顶号后延时的登录时间（分钟）",
+      "help": "最小为10分钟"
     }
   },
   "Optimization": {
