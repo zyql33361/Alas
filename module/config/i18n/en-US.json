@@ -499,7 +499,7 @@
     },
     "PauseMinutes": {
       "name": "Delayed login time after being kicked off (minutes)",
-      "help": "Minimum 10 minutes"
+      "help": "Minimum limit of 10 minutes, enter 0 to close"
     }
   },
   "Optimization": {
