@@ -38,7 +38,12 @@ class AzurLaneAutoScript:
             config = AzurLaneConfig(config_name=self.config_name)
             return config
         except RequestHumanTakeover:
-            logger.critical('Request human takeover')
+            logger.critical('Request human takeover')  #解决部分不推送报错
+            handle_notify(
+                self.config.Error_OnePushConfig,
+                title=f"Alas <{self.config_name}> crashed",
+                content=f"<{self.config_name}> RequestHumanTakeover",
+            )
             exit(1)
         except Exception as e:
             logger.exception(e)
@@ -52,6 +57,11 @@ class AzurLaneAutoScript:
             return device
         except RequestHumanTakeover:
             logger.critical('Request human takeover')
+            handle_notify(                              #解决部分不推送报错（如模拟器未开启
+                self.config.Error_OnePushConfig,
+                title=f"Alas <{self.config_name}> crashed",
+                content=f"<{self.config_name}> RequestHumanTakeover",
+            )
             exit(1)
         except EmulatorNotRunningError:
             logger.critical('EmulatorNotRunningError')
