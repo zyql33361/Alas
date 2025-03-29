@@ -461,6 +461,7 @@ RaidDaily:
     hard > normal > easy
 Hospital:
   UseRecommendFleet: true
+  mapName: 0-T1
 MaritimeEscort:
   Enable: true
 Coalition:
