@@ -2,6 +2,8 @@ import os
 import re
 import json
 import time
+
+import adbutils
 import requests
 import datetime
 from typing import Any
@@ -203,6 +205,8 @@ class AssistantHandler:
 
     def connect(self):
         adb = os.path.abspath(DeployConfig().AdbExecutable)
+        if not os.path.exists(adb):
+            adb = adbutils.adb_path()
         self.serial = self.config.MaaEmulator_Serial
         self.serial_check()
 

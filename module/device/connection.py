@@ -661,7 +661,7 @@ class Connection(ConnectionAttr):
             else:
                 raise
 
-    def adb_push(self, local, remote):
+    def adb_push(self, local, remote, timeout=10):
         """
         Args:
             local (str):
@@ -671,7 +671,7 @@ class Connection(ConnectionAttr):
             str:
         """
         cmd = ['push', local, remote]
-        return self.adb_command(cmd)
+        return self.adb_command(cmd, timeout=timeout)
 
     @Config.when(DEVICE_OVER_HTTP=False)
     def adb_connect(self):

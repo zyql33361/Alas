@@ -1,3 +1,4 @@
+import collections
 import re
 
 import cv2
@@ -987,3 +988,26 @@ def color_bar_percentage(image, area, prev_color, reverse=False, starter=0, thre
         prev_color = np.mean(image[:, left:prev_index + 1][mask], axis=0)
 
     return 0.
+
+class ApiCollectionSwitch:
+    def __init__(self, old, new):
+        self.old = old
+        self.new = new
+
+        self.switch_stack = collections.deque()
+        self.current_use = new
+
+    def switch_to_old(self):
+        self.switch_stack.append(self.current_use)
+        self.current_use = self.old
+
+    def switch_to_new(self):
+        self.switch_stack.append(self.current_use)
+        self.current_use = self.new
+
+    def switch_back(self):
+        if len(self.switch_stack) == 0:
+            self.current_use = self.new
+            return
+
+        self.current_use = self.switch_stack.pop()
