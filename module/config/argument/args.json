@@ -3050,13 +3050,13 @@
       }
     },
     "StopCondition": {
-      "RunCount": {
-        "type": "input",
-        "value": 0
-      },
       "OilLimit": {
         "type": "input",
         "value": 1000
+      },
+      "RunCount": {
+        "type": "input",
+        "value": 0
       },
       "MapAchievement": {
         "type": "select",
