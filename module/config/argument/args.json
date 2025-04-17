@@ -1782,12 +1782,12 @@
         "display": "hide",
         "option_bold": [
           "event_20230223_cn",
-          "event_20240521_cn"
+          "event_20241024_cn"
         ],
         "cn": "event_20230223_cn",
         "en": "event_20230223_cn",
         "jp": "event_20230223_cn",
-        "tw": "event_20240521_cn"
+        "tw": "event_20241024_cn"
       },
       "Mode": {
         "type": "select",
@@ -4892,12 +4892,12 @@
         ],
         "option_bold": [
           "event_20230223_cn",
-          "event_20240521_cn"
+          "event_20241024_cn"
         ],
         "cn": "event_20230223_cn",
         "en": "event_20230223_cn",
         "jp": "event_20230223_cn",
-        "tw": "event_20240521_cn"
+        "tw": "event_20241024_cn"
       },
       "Mode": {
         "type": "select",
@@ -5808,12 +5808,12 @@
         ],
         "option_bold": [
           "event_20230223_cn",
-          "event_20240521_cn"
+          "event_20241024_cn"
         ],
         "cn": "event_20230223_cn",
         "en": "event_20230223_cn",
         "jp": "event_20230223_cn",
-        "tw": "event_20240521_cn"
+        "tw": "event_20241024_cn"
       },
       "Mode": {
         "type": "select",
@@ -6615,11 +6615,12 @@
           "coalition_20240627"
         ],
         "option_bold": [
+          "coalition_20230323",
           "coalition_20240627"
         ],
-        "cn": "coalition_20240627",
-        "en": "coalition_20240627",
-        "jp": "coalition_20240627",
+        "cn": "coalition_20230323",
+        "en": "coalition_20230323",
+        "jp": "coalition_20230323",
         "tw": "coalition_20240627"
       },
       "Mode": {
@@ -6660,11 +6661,11 @@
     "Coalition": {
       "Mode": {
         "type": "select",
-        "value": "hard",
+        "value": "tc1",
         "option": [
-          "easy",
-          "normal",
-          "hard",
+          "tc1",
+          "tc2",
+          "tc3",
           "ex"
         ]
       },
@@ -7408,12 +7409,12 @@
         ],
         "option_bold": [
           "event_20230223_cn",
-          "event_20240521_cn"
+          "event_20241024_cn"
         ],
         "cn": "event_20230223_cn",
         "en": "event_20230223_cn",
         "jp": "event_20230223_cn",
-        "tw": "event_20240521_cn"
+        "tw": "event_20241024_cn"
       },
       "Mode": {
         "type": "select",
@@ -7883,12 +7884,12 @@
         ],
         "option_bold": [
           "event_20230223_cn",
-          "event_20240521_cn"
+          "event_20241024_cn"
         ],
         "cn": "event_20230223_cn",
         "en": "event_20230223_cn",
         "jp": "event_20230223_cn",
-        "tw": "event_20240521_cn"
+        "tw": "event_20241024_cn"
       },
       "Mode": {
         "type": "select",
@@ -8358,12 +8359,12 @@
         ],
         "option_bold": [
           "event_20230223_cn",
-          "event_20240521_cn"
+          "event_20241024_cn"
         ],
         "cn": "event_20230223_cn",
         "en": "event_20230223_cn",
         "jp": "event_20230223_cn",
-        "tw": "event_20240521_cn"
+        "tw": "event_20241024_cn"
       },
       "Mode": {
         "type": "select",
@@ -8833,12 +8834,12 @@
         ],
         "option_bold": [
           "event_20230223_cn",
-          "event_20240521_cn"
+          "event_20241024_cn"
         ],
         "cn": "event_20230223_cn",
         "en": "event_20230223_cn",
         "jp": "event_20230223_cn",
-        "tw": "event_20240521_cn"
+        "tw": "event_20241024_cn"
       },
       "Mode": {
         "type": "select",
@@ -9298,12 +9299,12 @@
         ],
         "option_bold": [
           "event_20230223_cn",
-          "event_20240521_cn"
+          "event_20241024_cn"
         ],
         "cn": "event_20230223_cn",
         "en": "event_20230223_cn",
         "jp": "event_20230223_cn",
-        "tw": "event_20240521_cn"
+        "tw": "event_20241024_cn"
       },
       "Mode": {
         "type": "select",
@@ -9926,11 +9927,12 @@
           "coalition_20240627"
         ],
         "option_bold": [
+          "coalition_20230323",
           "coalition_20240627"
         ],
-        "cn": "coalition_20240627",
-        "en": "coalition_20240627",
-        "jp": "coalition_20240627",
+        "cn": "coalition_20230323",
+        "en": "coalition_20230323",
+        "jp": "coalition_20230323",
         "tw": "coalition_20240627"
       },
       "Mode": {
@@ -9971,11 +9973,12 @@
     "Coalition": {
       "Mode": {
         "type": "select",
-        "value": "hard",
+        "value": "sp",
         "option": [
-          "easy",
-          "normal",
-          "hard",
+          "tc1",
+          "tc2",
+          "tc3",
+          "sp",
           "ex"
         ],
         "display": "hide"
