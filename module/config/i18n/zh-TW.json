@@ -504,6 +504,10 @@
     "ScreenshotLength": {
       "name": "出錯時，保留最後 X 張截圖",
       "help": ""
+    },
+    "PauseMinutes": {
+      "name": "Error.PauseMinutes.name",
+      "help": "Error.PauseMinutes.help"
     }
   },
   "Optimization": {
@@ -1190,6 +1194,15 @@
       "ship": "更換艦船",
       "ship_equip": "更換艦船 + 裝備"
     },
+    "CommonDD": {
+      "name": "指定前排",
+      "help": "",
+      "any": "任意",
+      "favourite": "僅常用",
+      "aulick_or_foote": "奧利克或富特",
+      "cassin_or_downes": "卡辛或唐斯",
+      "z20_or_z21": "Z20或Z21"
+    },
     "ALLowLowVanguardLevel": {
       "name": "可更換低等級前排",
       "help": "倍率打開時，前排等級限制改為10以上即可"
@@ -1204,15 +1217,6 @@
     "StopIFAutoNotEnsured": {
       "name": "GemsFarming.StopIFAutoNotEnsured.name",
       "help": "GemsFarming.StopIFAutoNotEnsured.help"
-    },
-    "CommonDD": {
-      "name": "指定前排",
-      "help": "",
-      "any": "任意",
-      "favourite": "僅常用",
-      "aulick_or_foote": "奧利克或富特",
-      "cassin_or_downes": "卡辛或唐斯",
-      "z20_or_z21": "Z20或Z21"
     },
     "CommissionLimit": {
       "name": "防止緊急委託數量過多",

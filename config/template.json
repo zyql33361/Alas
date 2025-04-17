@@ -539,8 +539,8 @@
       "AmbushEvade": true
     },
     "StopCondition": {
-      "RunCount": 0,
       "OilLimit": 1000,
+      "RunCount": 0,
       "MapAchievement": "non_stop",
       "StageIncrease": false,
       "GetNewShip": false,
@@ -1956,9 +1956,6 @@
       "SuccessInterval": 30,
       "FailureInterval": 60,
       "ServerUpdate": "00:00, 12:00"
-    },
-    "HigherPriority": {
-      "Enable": false
     },
     "OpsiHazard1Leveling": {
       "TargetZone": 0
