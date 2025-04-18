@@ -128,28 +128,20 @@ def write_file(file, data):
         file (str):
         data (dict, list):
     """
-    folder = os.path.dirname(file)
-    if not os.path.exists(folder):
-        os.mkdir(folder)
-
-    _, ext = os.path.splitext(file)
-    lock = FileLock(f"{file}.lock")
-    with lock:
-        print(f'write: {file}')
-        if ext == '.yaml':
-            with atomic_write(file, overwrite=True, encoding='utf-8', newline='') as f:
-                if isinstance(data, list):
-                    yaml.safe_dump_all(data, f, default_flow_style=False, encoding='utf-8', allow_unicode=True,
-                                       sort_keys=False)
-                else:
-                    yaml.safe_dump(data, f, default_flow_style=False, encoding='utf-8', allow_unicode=True,
-                                   sort_keys=False)
-        elif ext == '.json':
-            with atomic_write(file, overwrite=True, encoding='utf-8', newline='') as f:
-                s = json.dumps(data, indent=2, ensure_ascii=False, sort_keys=False, default=str)
-                f.write(s)
+    print(f'write: {file}')
+    if file.endswith('.json'):
+        content = json.dumps(data, indent=2, ensure_ascii=False, sort_keys=False, default=str)
+        atomic_write(file, content)
+    elif file.endswith('.yaml'):
+        if isinstance(data, list):
+            content = yaml.safe_dump_all(
+                data, default_flow_style=False, encoding='utf-8', allow_unicode=True, sort_keys=False)
         else:
-            print(f'Unsupported config file extension: {ext}')
+            content = yaml.safe_dump(
+                data, default_flow_style=False, encoding='utf-8', allow_unicode=True, sort_keys=False)
+        atomic_write(file, content)
+    else:
+        print(f'Unsupported config file extension: {file}')
 
 
 def iter_folder(folder, is_dir=False, ext=None):
