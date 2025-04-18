@@ -158,7 +158,7 @@ class ConnectionAttr:
             return 0
 
     @cached_property
-    def is_tunneled_mumu(self) -> bool:
+    def is_tunneled_device(self) -> bool:
         if self.port != 5555:
             return False
 
@@ -182,11 +182,8 @@ class ConnectionAttr:
     def is_mumu_family(self):
         # 127.0.0.1:7555
         # 127.0.0.1:16384 + 32*n
-        return (
-            self.serial == '127.0.0.1:7555' 
-            or self.is_mumu12_family
-            or self.is_tunneled_mumu
-        )
+        return self.serial == '127.0.0.1:7555' or self.is_mumu12_family
+
 
     @cached_property
     def is_ldplayer_bluestacks_family(self):
