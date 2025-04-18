@@ -9,7 +9,7 @@ import yaml
 from filelock import FileLock
 
 import module.config.server as server_
-from module.config.atomicwrites import atomic_write
+from deploy.atomic import atomic_read_text, atomic_read_bytes, atomic_write
 from module.submodule.utils import *
 
 LANGUAGES = ['zh-CN', 'en-US', 'ja-JP', 'zh-TW']
@@ -80,11 +80,22 @@ def read_file(file):
     Returns:
         dict, list:
     """
-    folder = os.path.dirname(file)
-    if not os.path.exists(folder):
-        os.mkdir(folder)
-
-    if not os.path.exists(file):
+    print(f'read: {file}')
+    if file.endswith('.json'):
+        content = atomic_read_bytes(file)
+        if not content:
+            return {}
+        return json.loads(content)
+    elif file.endswith('.yaml'):
+        content = atomic_read_text(file)
+        data = list(yaml.safe_load_all(content))
+        if len(data) == 1:
+            data = data[0]
+        if not data:
+            data = {}
+        return data
+    else:
+        print(f'Unsupported config file extension: {file}')
         return {}
 
     _, ext = os.path.splitext(file)
