@@ -13,7 +13,6 @@ from module.config.deep import deep_get, deep_set
 from module.exception import *
 from module.logger import logger
 from module.notify import handle_notify
-import gl
 
 
 class AzurLaneAutoScript:
@@ -644,7 +643,6 @@ class AzurLaneAutoScript:
 
 
     def loop(self):
-        gl.gl_set("g_config", self.config)
         logger.set_file_logger(self.config_name)
         logger.info(f'Start scheduler loop: {self.config_name}')
 
@@ -671,7 +669,6 @@ class AzurLaneAutoScript:
             _ = self.device
             self.device.config = self.config
 
-            gl.gl_set("g_current_task", task)
 
             # Skip first restart
             if task == 'Restart':
