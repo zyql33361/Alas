@@ -711,38 +711,6 @@ class Connection(ConnectionAttr):
 
         return False
 
-    def _wait_device_appear(self, serial, first_devices=None):
-        """
-        Args:
-            serial:
-            first_devices (list[AdbDeviceWithStatus]):
-
-        Returns:
-            bool: If appear
-        """
-        # Wait a little longer than 5s
-        timeout = Timer(5.2).start()
-        first_log = True
-        while 1:
-            if first_devices is not None:
-                devices = first_devices
-                first_devices = None
-            else:
-                devices = self.list_device()
-            # Check if device appear
-            for device in devices:
-                if device.serial == serial and device.status == 'device':
-                    return True
-            # Delay and check later
-            if timeout.reached():
-                break
-            if first_log:
-                logger.info(f'Waiting device appear: {serial}')
-                first_log = False
-            time.sleep(0.05)
-
-        return False
-
     @Config.when(DEVICE_OVER_HTTP=False)
     def adb_connect(self, wait_device=True):
         """
