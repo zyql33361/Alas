@@ -15,6 +15,7 @@ from module.device.method.utils import (RETRY_TRIES, retry_sleep, remove_prefix,
 from module.exception import RequestHumanTakeover, ScriptError, EmulatorNotRunningError
 from module.logger import logger
 
+_last_image_truncated_log_time = 0 
 
 def retry(func):
     @wraps(func)
@@ -58,7 +59,16 @@ def retry(func):
                     self.detect_package()
             # ImageTruncated
             except ImageTruncated as e:
-                logger.error(e)
+                global _last_image_truncated_log_time
+                now = time.time()
+                if self.is_tunneled_device:
+                    if now - _last_image_truncated_log_time > 20:
+                        logger.error(e)
+                        _last_image_truncated_log_time = now
+                    else:
+                        pass
+                else:
+                    logger.error(e)
 
                 def init():
                     pass
