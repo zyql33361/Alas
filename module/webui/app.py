@@ -1,13 +1,13 @@
 import argparse
 import re
 import json
+import os
 import queue
 import threading
 import time
 from datetime import datetime
 from functools import partial
 from typing import Dict, List, Optional
-
 # Import fake module before import pywebio to avoid importing unnecessary module PIL
 from module.webui.fake_pil_module import import_fake_pil_module
 
@@ -67,6 +67,7 @@ from module.webui.patch import patch_executor
 from module.webui.pin import put_input, put_select, pin_update
 from module.webui.process_manager import ProcessManager
 from module.webui.remote_access import RemoteAccess
+from module.webui.restart_tracker import get_restart_count, set_restart_count, reset_restart_count
 from module.webui.setting import State
 from module.webui.updater import updater
 from module.webui.utils import (
@@ -1195,6 +1196,13 @@ class AlasGUI(Frame):
         self.alas_mod = get_config_mod(config_name)
         self.alas = ProcessManager.get_manager(config_name)
         self.alas_config = load_config(config_name)
+
+        # 清除禁用标志 + 清除重启计数
+        disabled_flag_path = os.path.join("disabled_instance", f"{config_name}.flag")
+        if os.path.exists(disabled_flag_path):
+            os.remove(disabled_flag_path)
+        reset_restart_count(config_name)
+
         self.state_switch.switch()
         self.initial()
         self.alas_set_menu()
@@ -1616,11 +1624,13 @@ def clearup():
 
 
 g_instance_watcher: threading.Thread = None
-g_instance_restart_too_many_times: List[str] = list()
+g_instance_restart_too_many_times: list = []
+
+
 
 def instance_watcher_thread():
     global g_instance_restart_too_many_times
-    while 1:
+    while True:
         time.sleep(10)
         try:
             for instance in alas_instance():
@@ -1628,17 +1638,26 @@ def instance_watcher_thread():
                 config = AzurLaneConfig(ins.config_name)
 
                 enabled = deep_get(config.data, "Restart.InstanceRestart.Enabled", False)
+                if not enabled:
+                    continue
 
-                if enabled and ins.state == 3 and not ins.alive:
+                # 禁用标志路径
+                disabled_flag_path = os.path.join("disabled_instance", f"{ins.config_name}.flag")
+                os.makedirs("disabled_instance", exist_ok=True)
+
+                # 如果禁用标志存在，直接跳过
+                if os.path.exists(disabled_flag_path):
+                    continue
+
+                if ins.state == 3 and not ins.alive:
                     attempts = deep_get(config.data, "Restart.InstanceRestart.AttemptsToRestart", 3)
-                    has_restarted = deep_get(config.data, "Restart.InstanceRestart.HasRestarted", 0)
+                    has_restarted = get_restart_count(ins.config_name)
                     enable_notify = deep_get(config.data, "Restart.InstanceRestart.NotifyWhenAutoRestart", False)
                     push_config = deep_get(config.data, "Alas.Error.OnePushConfig")
 
-                    if has_restarted <= attempts and ins.config_name not in g_instance_restart_too_many_times:
+                    if has_restarted < attempts:
                         ins.start("alas")
-                        config.modified["Restart.InstanceRestart.HasRestarted"] = has_restarted + 1
-                        config.save()
+                        set_restart_count(ins.config_name, has_restarted + 1)
 
                         if enable_notify:
                             handle_notify(
@@ -1649,17 +1668,18 @@ def instance_watcher_thread():
                     else:
                         if ins.config_name not in g_instance_restart_too_many_times:
                             g_instance_restart_too_many_times.append(ins.config_name)
-                            config.modified["Restart.InstanceRestart.HasRestarted"] = 0
-                            config.save()
-                            g_instance_restart_too_many_times.append(ins.config_name)
+                            reset_restart_count(ins.config_name)
+                            # 写入禁用标志
+                            open(disabled_flag_path, "w").close()
+                            logger.info(f"Instance <{ins.config_name}> reached max restart attempts. Flag written to disable it.")
+                            
                             handle_notify(
                                 push_config,
-                                title=f"Alas <{ins.config_name}> instance restarted too many times",
-                                content=f"Too many critical error occurred, instance restarted too many times",
+                                title=f"Alas <{ins.config_name}> instance disabled due to too many restarts",
+                                content="The instance exceeded the max restart attempts and is now disabled.",
                             )
         except:
             ...
-
 
 def app():
     parser = argparse.ArgumentParser(description="Alas web service")
