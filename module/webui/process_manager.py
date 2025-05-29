@@ -45,6 +45,10 @@ class ProcessManager:
                 g_instance_restart_too_many_times.remove(self.config_name)
             except:
                 ...
+
+            from module.webui.restart_tracker import reset_restart_count
+            reset_restart_count(self.config_name)
+        
             self._process = Process(
                 target=ProcessManager.run_process,
                 args=(

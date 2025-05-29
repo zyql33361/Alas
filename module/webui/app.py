@@ -1196,13 +1196,6 @@ class AlasGUI(Frame):
         self.alas_mod = get_config_mod(config_name)
         self.alas = ProcessManager.get_manager(config_name)
         self.alas_config = load_config(config_name)
-
-        # 清除禁用标志 + 清除重启计数
-        disabled_flag_path = os.path.join("disabled_instance", f"{config_name}.flag")
-        if os.path.exists(disabled_flag_path):
-            os.remove(disabled_flag_path)
-        reset_restart_count(config_name)
-
         self.state_switch.switch()
         self.initial()
         self.alas_set_menu()
@@ -1624,9 +1617,7 @@ def clearup():
 
 
 g_instance_watcher: threading.Thread = None
-g_instance_restart_too_many_times: list = []
-
-
+g_instance_restart_too_many_times: List[str]
 
 def instance_watcher_thread():
     global g_instance_restart_too_many_times
@@ -1641,14 +1632,6 @@ def instance_watcher_thread():
                 if not enabled:
                     continue
 
-                # 禁用标志路径
-                disabled_flag_path = os.path.join("disabled_instance", f"{ins.config_name}.flag")
-                os.makedirs("disabled_instance", exist_ok=True)
-
-                # 如果禁用标志存在，直接跳过
-                if os.path.exists(disabled_flag_path):
-                    continue
-
                 if ins.state == 3 and not ins.alive:
                     attempts = deep_get(config.data, "Restart.InstanceRestart.AttemptsToRestart", 3)
                     has_restarted = get_restart_count(ins.config_name)
@@ -1658,7 +1641,7 @@ def instance_watcher_thread():
                     if has_restarted < attempts:
                         ins.start("alas")
                         set_restart_count(ins.config_name, has_restarted + 1)
-
+                        
                         if enable_notify:
                             handle_notify(
                                 push_config,
@@ -1669,10 +1652,6 @@ def instance_watcher_thread():
                         if ins.config_name not in g_instance_restart_too_many_times:
                             g_instance_restart_too_many_times.append(ins.config_name)
                             reset_restart_count(ins.config_name)
-                            # 写入禁用标志
-                            open(disabled_flag_path, "w").close()
-                            logger.info(f"Instance <{ins.config_name}> reached max restart attempts. Flag written to disable it.")
-                            
                             handle_notify(
                                 push_config,
                                 title=f"Alas <{ins.config_name}> instance disabled due to too many restarts",
