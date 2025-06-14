@@ -68,6 +68,9 @@ Overview:
   Medal:
   Core:
   GuildCoin:
+  ResearchPercent:
+  PlayerLevel:
+  PlayerExp:
   Log:
   Running:
   Pending:

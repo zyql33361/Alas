@@ -128,8 +128,8 @@ Deploy:
     WebuiHost: 0.0.0.0
     # --port. Port to listen
     # You will be able to access webui via `http://{host}:{port}`
-    # [In most cases] Default to 22367
-    WebuiPort: 22367
+    # [In most cases] Default to 22267
+    WebuiPort: 22267
     # Language to use on web ui
     # 'zh-CN' for Chinese simplified
     # 'en-US' for English
@@ -158,9 +158,11 @@ Deploy:
     # '["alas"]' specified "alas" config
     # '["alas","alas2"]' specified "alas" "alas2" configs
     Run: null
-    # To update app.asar
-    # [In most cases] true
-    AppAsarUpdate: true
-    # --no-sandbox. https://github.com/electron/electron/issues/30966
-    # Some Windows systems cannot call the GPU normally for virtualization, and you need to manually turn off sandbox mode
-    NoSandbox: false
+    # SSL support
+    # Only effective when both parameters below are set
+    # --ssl-key. Path to SSL key file
+    # [Default] null (no SSL)
+    WebuiSSLKey: null
+    # --ssl-cert. Path to SSL cert file
+    # [Default] null (no SSL)
+    WebuiSSLCert: null

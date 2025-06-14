@@ -1,6 +1,6 @@
 from cached_property import cached_property
 from module.logger import logger
-from module.config.utils import deep_get
+from module.config.deep import deep_get
 from datetime import datetime
 
 
@@ -10,7 +10,20 @@ class LogRes:
     Logres(AzurLaneConfig).<res_name>=resource_value:int
     OR  ={'Value:int, 'Limit/Total':int}:dict
     """
-    YellowCoin: list
+    YellowCoin: int
+    Oil: list
+    Coin: list
+    Gem: int
+    Pt: int
+    Cube: int
+    ActionPoint: list
+    PurpleCoin: int
+    Core: int
+    Medal: int
+    Merit: int
+    GuildCoin: int
+    ResearchPercent: int
+    AlasCoin: int
 
     def __init__(self, config):
         self.__dict__['config'] = config

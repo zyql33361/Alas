@@ -13,8 +13,12 @@ from module.handler.fast_forward import map_files, to_map_file_name
 from module.logger import logger
 from module.notify import handle_notify
 from module.ui.page import page_campaign
-from module.config.utils import deep_get, deep_set
+from module.config.deep import deep_get, deep_set
 from datetime import datetime, timedelta
+from module.exception import GameStuckError,GamePageUnknownError
+from module.handler.assets import LOW_EMOTION_LEFT
+from module.base.button import Button
+from module.ocr.ocr import Ocr
 
 class CampaignRun(CampaignEvent, ShopStatus):
     folder: str
@@ -326,15 +330,56 @@ class CampaignRun(CampaignEvent, ShopStatus):
             in: page_campaign
         """
         if self.campaign.commission_notice_show_at_campaign():
-            InfiniteDelayCommission = deep_get(self.config.data, "SomethingSpecial.InfiniteDelay.Commission")
-            if InfiniteDelayCommission:
-                logger.warning("Commission notice found, but skip to call task 'Commission' and delay it")
-                self.config.task_delay(target=datetime.now() + timedelta(hours=6, seconds=-1), task="Commission")
-            else:
                 logger.info('Commission notice found')
                 self.config.task_call('Commission', force_call=True)
                 self.config.task_stop('Commission notice found')
+            
+    def detect_low_emotion(self,name):
+        EMOTION_TIP_L1=Button(area=(352, 311, 929, 348), color=(), button=(352, 311, 929, 348))
+        EMOTION_TIP_L2=Button(area=(352, 350, 929, 387), color=(), button=(352, 350, 929, 387))
+        EMOTION_TIP_L3=Button(area=(352, 390, 929, 427), color=(), button=(352, 390, 929, 427))
+        # 获取识别结果
+        result =  Ocr(EMOTION_TIP_L1, lang= 'cnocr').ocr(self.device.image)
+        result += Ocr(EMOTION_TIP_L2, lang= 'cnocr').ocr(self.device.image)
+        result += Ocr(EMOTION_TIP_L3, lang= 'cnocr').ocr(self.device.image)
+        logger.info(result)
+        if "低心情" in result or "降低好感" in result:
+            logger.warning("舰队心情低")
 
+            method = self.config.Fleet_FleetOrder
+            if method == 'fleet1_mob_fleet2_boss':
+                fleet = 'fleet_1'
+            elif method == 'fleet1_boss_fleet2_mob':
+                fleet = 'fleet_2'
+            elif method == 'fleet1_all_fleet2_standby':
+                fleet = 'fleet_1'
+            elif method == 'fleet1_standby_fleet2_all':
+                fleet = 'fleet_2'
+            logger.info(f"now combat is {method}")    
+            logger.warning(f"{name} recorded {fleet} is :{getattr(self.campaign.emotion, fleet).current}")
+            if getattr(self.campaign.emotion, fleet).current > 75:    
+                handle_notify(
+                    self.config.Error_OnePushConfig,
+                    title=f"Alas <{self.config.config_name}> {name} Emotion calculate error ",
+                    content=f"<{self.config.config_name}> {fleet} recorded is {getattr(self.campaign.emotion, fleet).current},Emotion calculate error"
+                )
+            setattr(getattr(self.campaign.emotion, fleet), 'current', 0)
+            self.campaign.emotion.record()
+            self.campaign.emotion.show()
+            try:
+                self.campaign.emotion.check_reduce(self.campaign._map_battle)
+            except ScriptEnd as e:
+                logger.hr('Script end')
+                logger.info(str(e))
+                if self.appear_then_click(LOW_EMOTION_LEFT, offset=(30, 30), interval=3):
+                    return True
+                else:
+                    raise GamePageUnknownError(f'LOW EMOTION TIP FOUND, BUT NO LEFT button')
+                            
+        else:
+            logger.warning("Game stuck, but not emotion error")
+            raise GameStuckError(f'Wait too long but not emotion error')   
+        
     def run(self, name, folder='campaign_main', mode='normal', total=0):
         """
         Args:
@@ -423,7 +468,10 @@ class CampaignRun(CampaignEvent, ShopStatus):
                 logger.hr('Script end')
                 logger.info(str(e))
                 break
-
+            except GameStuckError as e:
+               if self.detect_low_emotion(name):
+                   break
+                   
             # Update config
             if len(self.campaign.config.modified):
                 logger.info('Updating config for dashboard')

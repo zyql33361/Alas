@@ -46,15 +46,15 @@ from functools import wraps
 #         return decorator2
 #
 #     return decorator
-def timeout(func, timeout_sec=30.0, *args, **kwargs):
+def timeout(_function, timeout_sec=30.0, *args, **kwargs):
     """Won't kill that task until it finishes"""
     from threading import Thread
     from module.logger import logger
 
-    def function_timeout(func):
+    def function_timeout(_func):
         t0 = time.time()
         success = True
-        p = Thread(target=func, args=args, kwargs=kwargs)
+        p = Thread(target=_func, args=args, kwargs=kwargs)
         p.start()
         p.join(timeout_sec)
         if p.is_alive():
@@ -63,11 +63,11 @@ def timeout(func, timeout_sec=30.0, *args, **kwargs):
         if t1 - t0 < 10:
             success = False
         _success = 'Done' if success else 'Failed'
-        logger.hr(f'{func.__name__}: {_success} in {str(round(t1 - t0, 1))}s', 1)
+        logger.hr(f'{_func.__name__}: {_success} in {str(round(t1 - t0, 1))}s', 1)
         if not success:
             return True
         return False
-    return function_timeout(func)
+    return function_timeout(_function)
 
 
 def timer(function):

@@ -16,3 +16,6 @@ Dashboard:
   - Medal
   - Merit
   - GuildCoin
+  - ResearchPercent
+  - PlayerLevel
+  - PlayerExp

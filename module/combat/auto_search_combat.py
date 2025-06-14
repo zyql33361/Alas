@@ -86,7 +86,7 @@ class AutoSearchCombat(MapOperation, Combat, CampaignStatus):
                 if self.__getattribute__("battle_count") != 0:
                     self.lv_get(after_battle=True)
                 else:
-                    logger.warning("Skip getting ship level when BATTLE_0")
+                    logger.info("Skip getting ship level when BATTLE_0")
         else:
             # Fleet changed
             logger.info(f'Fleet: {self.fleet_show_index}, fleet_current_index: {self.fleet_current_index}')
@@ -94,7 +94,7 @@ class AutoSearchCombat(MapOperation, Combat, CampaignStatus):
             if self.__getattribute__("battle_count") != 0:
                 self.lv_get(after_battle=False)
             else:
-                logger.warning("Skip getting ship level when BATTLE_0")
+                logger.info("Skip getting ship level when BATTLE_0")
 
         return checked
 

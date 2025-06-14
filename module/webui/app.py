@@ -4,14 +4,15 @@ import json
 import time
 import queue
 import argparse
+import re
 import json
+import os
 import queue
 import threading
 import time
 from datetime import datetime
 from functools import partial
 from typing import Dict, List, Optional
-
 # Import fake module before import pywebio to avoid importing unnecessary module PIL
 from module.webui.fake_pil_module import import_fake_pil_module
 
@@ -59,6 +60,7 @@ from module.config.utils import (
 from module.config.utils import time_delta
 from module.log_res.log_res import LogRes
 from module.logger import logger
+from module.notify import handle_notify
 from module.ocr.rpc import start_ocr_server_process, stop_ocr_server_process
 from module.submodule.submodule import load_config
 from module.submodule.utils import get_config_mod
@@ -67,9 +69,10 @@ from module.webui.discord_presence import close_discord_rpc, init_discord_rpc
 from module.webui.fastapi import asgi_app
 from module.webui.lang import _t, t
 from module.webui.patch import patch_executor
-from module.webui.pin import put_input, put_select
+from module.webui.pin import put_input, put_select, pin_update
 from module.webui.process_manager import ProcessManager
 from module.webui.remote_access import RemoteAccess
+from module.webui.restart_tracker import get_restart_count, set_restart_count, reset_restart_count
 from module.webui.setting import State
 from module.webui.updater import updater
 from module.webui.utils import (
@@ -1618,6 +1621,50 @@ def clearup():
     logger.info("Alas closed.")
 
 
+g_instance_watcher: threading.Thread = None
+g_instance_restart_too_many_times: List[str]
+
+def instance_watcher_thread():
+    global g_instance_restart_too_many_times
+    while True:
+        time.sleep(10)
+        try:
+            for instance in alas_instance():
+                ins = ProcessManager.get_manager(instance)
+                config = AzurLaneConfig(ins.config_name)
+
+                enabled = deep_get(config.data, "Restart.InstanceRestart.Enabled", False)
+                if not enabled:
+                    continue
+
+                if ins.state == 3 and not ins.alive:
+                    attempts = deep_get(config.data, "Restart.InstanceRestart.AttemptsToRestart", 3)
+                    has_restarted = get_restart_count(ins.config_name)
+                    enable_notify = deep_get(config.data, "Restart.InstanceRestart.NotifyWhenAutoRestart", False)
+                    push_config = deep_get(config.data, "Alas.Error.OnePushConfig")
+
+                    if has_restarted < attempts:
+                        ins.start("alas")
+                        set_restart_count(ins.config_name, has_restarted + 1)
+                        
+                        if enable_notify:
+                            handle_notify(
+                                push_config,
+                                title=f"Alas <{ins.config_name}> instance auto restarted",
+                                content=f"Critical error occurred, instance restarted",
+                            )
+                    else:
+                        if ins.config_name not in g_instance_restart_too_many_times:
+                            g_instance_restart_too_many_times.append(ins.config_name)
+                            reset_restart_count(ins.config_name)
+                            handle_notify(
+                                push_config,
+                                title=f"Alas <{ins.config_name}> instance disabled due to too many restarts",
+                                content="The instance exceeded the max restart attempts and is now disabled.",
+                            )
+        except:
+            ...
+
 def app():
     parser = argparse.ArgumentParser(description="Alas web service")
     parser.add_argument(
@@ -1659,6 +1706,11 @@ def app():
 
     from deploy.atomic import atomic_failure_cleanup
     atomic_failure_cleanup('./config')
+
+    global g_instance_watcher
+    if g_instance_watcher is None:
+        g_instance_watcher = threading.Thread(target=instance_watcher_thread)
+        g_instance_watcher.start()
 
     def index():
         if key is not None and not login(key):

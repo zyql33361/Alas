@@ -91,7 +91,9 @@ class LoginHandler(UI):
                 continue
             # Popups appear at page_main
             if self.ui_page_main_popups(get_ship=login_success):
-                return True
+                if self.is_in_main():
+                    return True
+                continue
             # Always goto page_main
             if self.appear_then_click(GOTO_MAIN, offset=(30, 30), interval=5):
                 continue

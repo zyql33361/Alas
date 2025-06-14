@@ -24,6 +24,7 @@ Alas:
       - Scheduler
       - RestartEmulator
       - AutoRestart
+      - InstanceRestart
 
 # ==================== Farm ====================
 
@@ -64,6 +65,78 @@ Farm:
       - Campaign
       - StopCondition
       - Fleet
+
+# ==================== ResearchFarming ====================
+
+ResearchFarming:
+  menu: 'collapse'
+  page: 'setting'
+  tasks:
+    ResearchFarmingSetting:
+      - Scheduler
+      - ResearchFarmingSetting
+      - OpsiHazard1ResearchFarming
+      - ResearchFarm1Setting
+      - ResearchFarm2Setting
+      - ResearchFarm3Setting
+      - ResearchFarm4Setting
+      - ResearchFarm5Setting
+      - ResearchFarm6Setting
+
+    ResearchFarm:
+      - Scheduler
+      - Campaign
+      - StopCondition
+      - Fleet
+      - Submarine
+      - Emotion
+      - HpControl
+      - EnemyPriority
+    ResearchFarm2:
+      - Scheduler
+      - Campaign
+      - StopCondition
+      - Fleet
+      - Submarine
+      - Emotion
+      - HpControl
+      - EnemyPriority
+    ResearchFarm3:
+      - Scheduler
+      - Campaign
+      - StopCondition
+      - Fleet
+      - Submarine
+      - Emotion
+      - HpControl
+      - EnemyPriority
+    ResearchFarm4:
+      - Scheduler
+      - Campaign
+      - StopCondition
+      - Fleet
+      - Submarine
+      - Emotion
+      - HpControl
+      - EnemyPriority
+    ResearchFarm5:
+      - Scheduler
+      - Campaign
+      - StopCondition
+      - Fleet
+      - Submarine
+      - Emotion
+      - HpControl
+      - EnemyPriority
+    ResearchFarm6:
+      - Scheduler
+      - Campaign
+      - StopCondition
+      - Fleet
+      - Submarine
+      - Emotion
+      - HpControl
+      - EnemyPriority
 
 # ==================== Event ====================
 
@@ -260,6 +333,7 @@ DailyMission:
       - MedalShop2
       - MeritShop
       - CoreShop
+      - EventShop
     Shipyard:
       - Scheduler
       - ShipyardDr
@@ -330,6 +404,7 @@ Opsi:
       - OpsiFleet
     OpsiHazard1Leveling:
       - Scheduler
+      - HigherPriority
       - OpsiHazard1Leveling
       - OpsiFleet
     OpsiCrossMonth:

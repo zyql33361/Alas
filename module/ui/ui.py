@@ -1,7 +1,10 @@
+from datetime import datetime, timedelta
+
 from module.base.button import Button
 from module.base.decorator import run_once
 from module.base.timer import Timer
 from module.combat.assets import GET_ITEMS_1, GET_ITEMS_2, GET_SHIP
+from module.config.deep import deep_get
 from module.event_hospital.assets import HOSIPITAL_CLUE_CHECK, HOSPITAL_BATTLE_EXIT
 from module.exception import (GameNotRunningError, GamePageUnknownError,
                               GameTooManyClickError)
@@ -10,6 +13,7 @@ from module.handler.assets import (AUTO_SEARCH_MENU_EXIT, BATTLE_PASS_NEW_SEASON
                                    LOGIN_ANNOUNCE, LOGIN_ANNOUNCE_2, LOGIN_CHECK, LOGIN_RETURN_SIGN,
                                    MAINTENANCE_ANNOUNCE, MONTHLY_PASS_NOTICE)
 from module.handler.info_handler import InfoHandler
+from module.log_res.log_res import LogRes
 from module.logger import logger
 from module.map.assets import (FLEET_PREPARATION, MAP_PREPARATION,
                                MAP_PREPARATION_CANCEL, WITHDRAW)
@@ -18,7 +22,7 @@ from module.ocr.ocr import Ocr
 from module.os_handler.assets import (AUTO_SEARCH_REWARD, EXCHANGE_CHECK, RESET_FLEET_PREPARATION, RESET_TICKET_POPUP)
 from module.raid.assets import *
 from module.ui.assets import *
-from module.ui.page import (Page, page_campaign, page_event, page_main, page_main_white, page_sp)
+from module.ui.page import (Page, page_campaign, page_event, page_main, page_main_white, page_sp, page_player)
 from module.ui_white.assets import *
 
 
@@ -222,7 +226,44 @@ class UI(InfoHandler):
         logger.critical("Please switch to a supported page before starting Alas")
         raise GamePageUnknownError
 
-    def ui_goto(self, destination, offset=(30, 30), skip_first_screenshot=True):
+    def update_player_info(self):
+        self.ui_goto_old(page_player)
+
+        img = self.device.screenshot()
+
+        level_ocr = Ocr(buttons=OCR_PLAYER_LEVEL)
+        level_res = level_ocr.ocr(img)
+        exp_ocr = Ocr(buttons=OCR_PLAYER_EXP)
+        exp_res = exp_ocr.ocr(img)
+
+        if isinstance(level_res, str):
+            level_str = level_res.replace(".", "").lower().replace("lv", "")
+            if level_str.isdigit():
+                LogRes(config=self.config).PlayerLevel = {
+                    "Value": int(level_str)
+                }
+
+        if isinstance(exp_res, str):
+            exp_info = exp_res.split("/")
+            if len(exp_info) == 2:
+                curr_exp, exp_limit = exp_info[0], exp_info[1]
+                if curr_exp.isdigit() and exp_limit.isdigit():
+                    LogRes(config=self.config).PlayerExp = {
+                        "Value": int(curr_exp),
+                        "Limit": int(exp_limit)
+                    }
+
+        self.config.save(self.config.config_name)
+
+    def ui_goto(self, destination, *args, **kwargs):
+        player_info_last_updated_time = deep_get(self.config.data, "Dashboard.PlayerExp.Record")
+        now = datetime.now()
+        if now >= player_info_last_updated_time + timedelta(hours=24):
+            self.update_player_info()
+
+        self.ui_goto_old(destination, *args, **kwargs)
+
+    def ui_goto_old(self, destination, offset=(30, 30), skip_first_screenshot=True):
         """
         Args:
             destination (Page):
@@ -234,8 +275,13 @@ class UI(InfoHandler):
         self.interval_clear(list(Page.iter_check_buttons()))
 
         logger.hr(f"UI goto {destination}")
+        loop_count = 0
         while 1:
             GOTO_MAIN.clear_offset()
+            loop_count += 1
+            if loop_count > 100 and destination == page_event:
+                logger.warning(f'Loop count in ui_goto: {destination} too many times, break!')
+                raise RequestHumanTakeover
             if skip_first_screenshot:
                 skip_first_screenshot = False
             else:

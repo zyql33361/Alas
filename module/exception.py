@@ -65,3 +65,7 @@ class RequestHumanTakeover(Exception):
 
 class AutoSearchSetError(Exception):
     pass
+
+
+class RequireRestartGame(Exception):
+    pass

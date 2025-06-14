@@ -183,10 +183,6 @@ class Screenshot(Adb, WSA, DroidCast, AScreenCap, Scrcpy, NemuIpc, LDOpenGL):
         else:
             logger.warning(f'Unknown screenshot interval: {interval}')
             raise ScriptError(f'Unknown screenshot interval: {interval}')
-        # Screenshot interval in scrcpy is meaningless,
-        # video stream is received continuously no matter you use it or not.
-        if self.config.Emulator_ScreenshotMethod == 'scrcpy':
-            interval = 0.1
 
         if interval != self._screenshot_interval.limit:
             logger.info(f'Screenshot interval set to {interval}s')

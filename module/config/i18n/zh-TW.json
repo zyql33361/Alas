@@ -8,6 +8,10 @@
       "name": "出擊",
       "help": ""
     },
+    "ResearchFarming": {
+      "name": "Menu.ResearchFarming.name",
+      "help": "Menu.ResearchFarming.help"
+    },
     "Event": {
       "name": "活動",
       "help": ""
@@ -61,6 +65,34 @@
     "GemsFarming": {
       "name": "刷緊急委託",
       "help": ""
+    },
+    "ResearchFarmingSetting": {
+      "name": "Task.ResearchFarmingSetting.name",
+      "help": "Task.ResearchFarmingSetting.help"
+    },
+    "ResearchFarm": {
+      "name": "Task.ResearchFarm.name",
+      "help": "Task.ResearchFarm.help"
+    },
+    "ResearchFarm2": {
+      "name": "Task.ResearchFarm2.name",
+      "help": "Task.ResearchFarm2.help"
+    },
+    "ResearchFarm3": {
+      "name": "Task.ResearchFarm3.name",
+      "help": "Task.ResearchFarm3.help"
+    },
+    "ResearchFarm4": {
+      "name": "Task.ResearchFarm4.name",
+      "help": "Task.ResearchFarm4.help"
+    },
+    "ResearchFarm5": {
+      "name": "Task.ResearchFarm5.name",
+      "help": "Task.ResearchFarm5.help"
+    },
+    "ResearchFarm6": {
+      "name": "Task.ResearchFarm6.name",
+      "help": "Task.ResearchFarm6.help"
     },
     "EventGeneral": {
       "name": "活動通用",
@@ -525,6 +557,22 @@
       "name": "戰鬥中放慢截圖速度至 X 秒一張",
       "help": "執行兩次截圖之間的最小間隔，限制在 0.3 ~ 1.0，能降低戰鬥時的 CPU 佔用"
     },
+    "ClickMaxRecord": {
+      "name": "Optimization.ClickMaxRecord.name",
+      "help": "Optimization.ClickMaxRecord.help"
+    },
+    "SingleButtonMaxCount": {
+      "name": "Optimization.SingleButtonMaxCount.name",
+      "help": "Optimization.SingleButtonMaxCount.help"
+    },
+    "MultiButtonMaxCount1": {
+      "name": "Optimization.MultiButtonMaxCount1.name",
+      "help": "Optimization.MultiButtonMaxCount1.help"
+    },
+    "MultiButtonMaxCount2": {
+      "name": "Optimization.MultiButtonMaxCount2.name",
+      "help": "Optimization.MultiButtonMaxCount2.help"
+    },
     "TaskHoardingDuration": {
       "name": "囤積任務 X 分鐘",
       "help": "能在收穫期間降低操作遊戲的頻率\n任務觸發後，等待 X 分鐘後，一次性執行佇列中的任務"
@@ -577,6 +625,12 @@
       "help": "啟用後會放緩結算時的點擊速度\n在自律尋敵下不生效",
       "do_not": "無操作",
       "save": "保存"
+    },
+    "MetaRecord": {
+      "name": "DropRecord.MetaRecord.name",
+      "help": "DropRecord.MetaRecord.help",
+      "do_not": "do_not",
+      "save": "save"
     },
     "OpsiRecord": {
       "name": "大世界掉落截圖",
@@ -763,7 +817,7 @@
       "event_20241219_cn": "Substellar Crepuscule",
       "event_20250227_cn": "Paradiso of Shackled Light",
       "event_20250424_cn": "Toward Tulipa’s Seas",
-      "event_20250520_cn": "A Rose on the High Tower",
+      "event_20250520_cn": "高塔上的薔薇",
       "raid_20200624": "特別演習埃塞克斯級(復刻)",
       "raid_20210708": "復刻穿越彼方的水線",
       "raid_20220127": "演習神秘事件調查",
@@ -1059,6 +1113,432 @@
       "help": ""
     }
   },
+  "ResearchFarmingSetting": {
+    "_info": {
+      "name": "ResearchFarmingSetting._info.name",
+      "help": "ResearchFarmingSetting._info.help"
+    },
+    "OilLimit": {
+      "name": "ResearchFarmingSetting.OilLimit.name",
+      "help": "ResearchFarmingSetting.OilLimit.help"
+    },
+    "ResearchSeries": {
+      "name": "ResearchFarmingSetting.ResearchSeries.name",
+      "help": "ResearchFarmingSetting.ResearchSeries.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7"
+    },
+    "ShipIndex": {
+      "name": "ResearchFarmingSetting.ShipIndex.name",
+      "help": "ResearchFarmingSetting.ShipIndex.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    },
+    "ExperienceIndex": {
+      "name": "ResearchFarmingSetting.ExperienceIndex.name",
+      "help": "ResearchFarmingSetting.ExperienceIndex.help",
+      "0": "0",
+      "1": "1",
+      "2": "2"
+    },
+    "CheckInterval": {
+      "name": "ResearchFarmingSetting.CheckInterval.name",
+      "help": "ResearchFarmingSetting.CheckInterval.help"
+    },
+    "CurrentCampaignTimes": {
+      "name": "ResearchFarmingSetting.CurrentCampaignTimes.name",
+      "help": "ResearchFarmingSetting.CurrentCampaignTimes.help"
+    },
+    "OnepushNotify": {
+      "name": "ResearchFarmingSetting.OnepushNotify.name",
+      "help": "ResearchFarmingSetting.OnepushNotify.help"
+    }
+  },
+  "OpsiHazard1ResearchFarming": {
+    "_info": {
+      "name": "OpsiHazard1ResearchFarming._info.name",
+      "help": "OpsiHazard1ResearchFarming._info.help"
+    },
+    "Enable": {
+      "name": "OpsiHazard1ResearchFarming.Enable.name",
+      "help": "OpsiHazard1ResearchFarming.Enable.help"
+    }
+  },
+  "ResearchFarm1Setting": {
+    "_info": {
+      "name": "ResearchFarm1Setting._info.name",
+      "help": "ResearchFarm1Setting._info.help"
+    },
+    "Enable": {
+      "name": "ResearchFarm1Setting.Enable.name",
+      "help": "ResearchFarm1Setting.Enable.help"
+    },
+    "Campaign": {
+      "name": "ResearchFarm1Setting.Campaign.name",
+      "help": "ResearchFarm1Setting.Campaign.help"
+    },
+    "Fleet1": {
+      "name": "ResearchFarm1Setting.Fleet1.name",
+      "help": "ResearchFarm1Setting.Fleet1.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    },
+    "EmotionValue": {
+      "name": "ResearchFarm1Setting.EmotionValue.name",
+      "help": "ResearchFarm1Setting.EmotionValue.help"
+    },
+    "EmotionControlMethod": {
+      "name": "ResearchFarm1Setting.EmotionControlMethod.name",
+      "help": "ResearchFarm1Setting.EmotionControlMethod.help",
+      "calculate": "calculate",
+      "ignore": "ignore",
+      "calculate_ignore": "calculate_ignore"
+    },
+    "Fleet1Control": {
+      "name": "ResearchFarm1Setting.Fleet1Control.name",
+      "help": "ResearchFarm1Setting.Fleet1Control.help",
+      "keep_exp_bonus": "keep_exp_bonus",
+      "prevent_green_face": "prevent_green_face",
+      "prevent_yellow_face": "prevent_yellow_face",
+      "prevent_red_face": "prevent_red_face"
+    },
+    "Fleet1Recover": {
+      "name": "ResearchFarm1Setting.Fleet1Recover.name",
+      "help": "ResearchFarm1Setting.Fleet1Recover.help",
+      "not_in_dormitory": "not_in_dormitory",
+      "dormitory_floor_1": "dormitory_floor_1",
+      "dormitory_floor_2": "dormitory_floor_2"
+    },
+    "Fleet2": {
+      "name": "ResearchFarm1Setting.Fleet2.name",
+      "help": "ResearchFarm1Setting.Fleet2.help",
+      "0": "0",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    }
+  },
+  "ResearchFarm2Setting": {
+    "_info": {
+      "name": "ResearchFarm2Setting._info.name",
+      "help": "ResearchFarm2Setting._info.help"
+    },
+    "Enable": {
+      "name": "ResearchFarm2Setting.Enable.name",
+      "help": "ResearchFarm2Setting.Enable.help"
+    },
+    "Campaign": {
+      "name": "ResearchFarm2Setting.Campaign.name",
+      "help": "ResearchFarm2Setting.Campaign.help"
+    },
+    "Fleet1": {
+      "name": "ResearchFarm2Setting.Fleet1.name",
+      "help": "ResearchFarm2Setting.Fleet1.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    },
+    "EmotionValue": {
+      "name": "ResearchFarm2Setting.EmotionValue.name",
+      "help": "ResearchFarm2Setting.EmotionValue.help"
+    },
+    "EmotionControlMethod": {
+      "name": "ResearchFarm2Setting.EmotionControlMethod.name",
+      "help": "ResearchFarm2Setting.EmotionControlMethod.help",
+      "calculate": "calculate",
+      "ignore": "ignore",
+      "calculate_ignore": "calculate_ignore"
+    },
+    "Fleet1Control": {
+      "name": "ResearchFarm2Setting.Fleet1Control.name",
+      "help": "ResearchFarm2Setting.Fleet1Control.help",
+      "keep_exp_bonus": "keep_exp_bonus",
+      "prevent_green_face": "prevent_green_face",
+      "prevent_yellow_face": "prevent_yellow_face",
+      "prevent_red_face": "prevent_red_face"
+    },
+    "Fleet1Recover": {
+      "name": "ResearchFarm2Setting.Fleet1Recover.name",
+      "help": "ResearchFarm2Setting.Fleet1Recover.help",
+      "not_in_dormitory": "not_in_dormitory",
+      "dormitory_floor_1": "dormitory_floor_1",
+      "dormitory_floor_2": "dormitory_floor_2"
+    },
+    "Fleet2": {
+      "name": "ResearchFarm2Setting.Fleet2.name",
+      "help": "ResearchFarm2Setting.Fleet2.help",
+      "0": "0",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    }
+  },
+  "ResearchFarm3Setting": {
+    "_info": {
+      "name": "ResearchFarm3Setting._info.name",
+      "help": "ResearchFarm3Setting._info.help"
+    },
+    "Enable": {
+      "name": "ResearchFarm3Setting.Enable.name",
+      "help": "ResearchFarm3Setting.Enable.help"
+    },
+    "Campaign": {
+      "name": "ResearchFarm3Setting.Campaign.name",
+      "help": "ResearchFarm3Setting.Campaign.help"
+    },
+    "Fleet1": {
+      "name": "ResearchFarm3Setting.Fleet1.name",
+      "help": "ResearchFarm3Setting.Fleet1.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    },
+    "EmotionValue": {
+      "name": "ResearchFarm3Setting.EmotionValue.name",
+      "help": "ResearchFarm3Setting.EmotionValue.help"
+    },
+    "EmotionControlMethod": {
+      "name": "ResearchFarm3Setting.EmotionControlMethod.name",
+      "help": "ResearchFarm3Setting.EmotionControlMethod.help",
+      "calculate": "calculate",
+      "ignore": "ignore",
+      "calculate_ignore": "calculate_ignore"
+    },
+    "Fleet1Control": {
+      "name": "ResearchFarm3Setting.Fleet1Control.name",
+      "help": "ResearchFarm3Setting.Fleet1Control.help",
+      "keep_exp_bonus": "keep_exp_bonus",
+      "prevent_green_face": "prevent_green_face",
+      "prevent_yellow_face": "prevent_yellow_face",
+      "prevent_red_face": "prevent_red_face"
+    },
+    "Fleet1Recover": {
+      "name": "ResearchFarm3Setting.Fleet1Recover.name",
+      "help": "ResearchFarm3Setting.Fleet1Recover.help",
+      "not_in_dormitory": "not_in_dormitory",
+      "dormitory_floor_1": "dormitory_floor_1",
+      "dormitory_floor_2": "dormitory_floor_2"
+    },
+    "Fleet2": {
+      "name": "ResearchFarm3Setting.Fleet2.name",
+      "help": "ResearchFarm3Setting.Fleet2.help",
+      "0": "0",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    }
+  },
+  "ResearchFarm4Setting": {
+    "_info": {
+      "name": "ResearchFarm4Setting._info.name",
+      "help": "ResearchFarm4Setting._info.help"
+    },
+    "Enable": {
+      "name": "ResearchFarm4Setting.Enable.name",
+      "help": "ResearchFarm4Setting.Enable.help"
+    },
+    "Campaign": {
+      "name": "ResearchFarm4Setting.Campaign.name",
+      "help": "ResearchFarm4Setting.Campaign.help"
+    },
+    "Fleet1": {
+      "name": "ResearchFarm4Setting.Fleet1.name",
+      "help": "ResearchFarm4Setting.Fleet1.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    },
+    "EmotionValue": {
+      "name": "ResearchFarm4Setting.EmotionValue.name",
+      "help": "ResearchFarm4Setting.EmotionValue.help"
+    },
+    "EmotionControlMethod": {
+      "name": "ResearchFarm4Setting.EmotionControlMethod.name",
+      "help": "ResearchFarm4Setting.EmotionControlMethod.help",
+      "calculate": "calculate",
+      "ignore": "ignore",
+      "calculate_ignore": "calculate_ignore"
+    },
+    "Fleet1Control": {
+      "name": "ResearchFarm4Setting.Fleet1Control.name",
+      "help": "ResearchFarm4Setting.Fleet1Control.help",
+      "keep_exp_bonus": "keep_exp_bonus",
+      "prevent_green_face": "prevent_green_face",
+      "prevent_yellow_face": "prevent_yellow_face",
+      "prevent_red_face": "prevent_red_face"
+    },
+    "Fleet1Recover": {
+      "name": "ResearchFarm4Setting.Fleet1Recover.name",
+      "help": "ResearchFarm4Setting.Fleet1Recover.help",
+      "not_in_dormitory": "not_in_dormitory",
+      "dormitory_floor_1": "dormitory_floor_1",
+      "dormitory_floor_2": "dormitory_floor_2"
+    },
+    "Fleet2": {
+      "name": "ResearchFarm4Setting.Fleet2.name",
+      "help": "ResearchFarm4Setting.Fleet2.help",
+      "0": "0",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    }
+  },
+  "ResearchFarm5Setting": {
+    "_info": {
+      "name": "ResearchFarm5Setting._info.name",
+      "help": "ResearchFarm5Setting._info.help"
+    },
+    "Enable": {
+      "name": "ResearchFarm5Setting.Enable.name",
+      "help": "ResearchFarm5Setting.Enable.help"
+    },
+    "Campaign": {
+      "name": "ResearchFarm5Setting.Campaign.name",
+      "help": "ResearchFarm5Setting.Campaign.help"
+    },
+    "Fleet1": {
+      "name": "ResearchFarm5Setting.Fleet1.name",
+      "help": "ResearchFarm5Setting.Fleet1.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    },
+    "EmotionValue": {
+      "name": "ResearchFarm5Setting.EmotionValue.name",
+      "help": "ResearchFarm5Setting.EmotionValue.help"
+    },
+    "EmotionControlMethod": {
+      "name": "ResearchFarm5Setting.EmotionControlMethod.name",
+      "help": "ResearchFarm5Setting.EmotionControlMethod.help",
+      "calculate": "calculate",
+      "ignore": "ignore",
+      "calculate_ignore": "calculate_ignore"
+    },
+    "Fleet1Control": {
+      "name": "ResearchFarm5Setting.Fleet1Control.name",
+      "help": "ResearchFarm5Setting.Fleet1Control.help",
+      "keep_exp_bonus": "keep_exp_bonus",
+      "prevent_green_face": "prevent_green_face",
+      "prevent_yellow_face": "prevent_yellow_face",
+      "prevent_red_face": "prevent_red_face"
+    },
+    "Fleet1Recover": {
+      "name": "ResearchFarm5Setting.Fleet1Recover.name",
+      "help": "ResearchFarm5Setting.Fleet1Recover.help",
+      "not_in_dormitory": "not_in_dormitory",
+      "dormitory_floor_1": "dormitory_floor_1",
+      "dormitory_floor_2": "dormitory_floor_2"
+    },
+    "Fleet2": {
+      "name": "ResearchFarm5Setting.Fleet2.name",
+      "help": "ResearchFarm5Setting.Fleet2.help",
+      "0": "0",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    }
+  },
+  "ResearchFarm6Setting": {
+    "_info": {
+      "name": "ResearchFarm6Setting._info.name",
+      "help": "ResearchFarm6Setting._info.help"
+    },
+    "Enable": {
+      "name": "ResearchFarm6Setting.Enable.name",
+      "help": "ResearchFarm6Setting.Enable.help"
+    },
+    "Campaign": {
+      "name": "ResearchFarm6Setting.Campaign.name",
+      "help": "ResearchFarm6Setting.Campaign.help"
+    },
+    "Fleet1": {
+      "name": "ResearchFarm6Setting.Fleet1.name",
+      "help": "ResearchFarm6Setting.Fleet1.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    },
+    "EmotionValue": {
+      "name": "ResearchFarm6Setting.EmotionValue.name",
+      "help": "ResearchFarm6Setting.EmotionValue.help"
+    },
+    "EmotionControlMethod": {
+      "name": "ResearchFarm6Setting.EmotionControlMethod.name",
+      "help": "ResearchFarm6Setting.EmotionControlMethod.help",
+      "calculate": "calculate",
+      "ignore": "ignore",
+      "calculate_ignore": "calculate_ignore"
+    },
+    "Fleet1Control": {
+      "name": "ResearchFarm6Setting.Fleet1Control.name",
+      "help": "ResearchFarm6Setting.Fleet1Control.help",
+      "keep_exp_bonus": "keep_exp_bonus",
+      "prevent_green_face": "prevent_green_face",
+      "prevent_yellow_face": "prevent_yellow_face",
+      "prevent_red_face": "prevent_red_face"
+    },
+    "Fleet1Recover": {
+      "name": "ResearchFarm6Setting.Fleet1Recover.name",
+      "help": "ResearchFarm6Setting.Fleet1Recover.help",
+      "not_in_dormitory": "not_in_dormitory",
+      "dormitory_floor_1": "dormitory_floor_1",
+      "dormitory_floor_2": "dormitory_floor_2"
+    },
+    "Fleet2": {
+      "name": "ResearchFarm6Setting.Fleet2.name",
+      "help": "ResearchFarm6Setting.Fleet2.help",
+      "0": "0",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6"
+    }
+  },
   "HpControl": {
     "_info": {
       "name": "血量控制",
@@ -1313,6 +1793,10 @@
     "UseRecommendFleet": {
       "name": "使用艦隊推薦",
       "help": "如果關閉，需要事先手動為所有15個關卡配隊"
+    },
+    "mapName": {
+      "name": "Hospital.mapName.name",
+      "help": "Hospital.mapName.help"
     }
   },
   "MaritimeEscort": {
@@ -1654,6 +2138,10 @@
       "name": "認知覺醒",
       "help": "認知覺醒船塢內所有的船隻直到心智單元耗盡"
     },
+    "Favourite": {
+      "name": "Awaken.Favourite.name",
+      "help": "Awaken.Favourite.help"
+    },
     "LevelCap": {
       "name": "覺醒至等級上限",
       "help": "",
@@ -1883,6 +2371,37 @@
     "Filter": {
       "name": "商店過濾器",
       "help": ""
+    }
+  },
+  "EventShop": {
+    "_info": {
+      "name": "活動商店",
+      "help": "活動船只將會在活動結束後購買"
+    },
+    "Enable": {
+      "name": "啟用活動商店",
+      "help": ""
+    },
+    "UnlockShipSSR": {
+      "name": "解鎖活動金船",
+      "help": "如果不啟用，將會拋掉過濾器中的ShipSSR和Meta"
+    },
+    "BuyShipUR": {
+      "name": "購買X只活動彩船",
+      "help": "",
+      "0": "0",
+      "1": "1",
+      "2": "2"
+    },
+    "PresetFilter": {
+      "name": "活動商店過濾器",
+      "help": "",
+      "all": "全部",
+      "custom": "自定義"
+    },
+    "CustomFilter": {
+      "name": "自定義過濾器",
+      "help": "使用自定義過濾器需將 \"活動商店過濾器\" 設定為 \"自定義\"，並閱讀 https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/reward_shop_filter_string"
     }
   },
   "ShipyardDr": {
@@ -2316,6 +2835,10 @@
       "name": "任意艦船血量低於 X 後，回港修理",
       "help": "0.0 ~ 1.0"
     },
+    "DontRepair": {
+      "name": "OpsiGeneral.DontRepair.name",
+      "help": "OpsiGeneral.DontRepair.help"
+    },
     "DoRandomMapEvent": {
       "name": "完成地圖隨機事件",
       "help": "在自律尋敵完成後重新掃描一遍地圖，購買明石商店、使用塞壬信息收集裝置、使用塞壬探測裝置、解鎖兩艦隊機關"
@@ -2521,6 +3044,16 @@
     "TargetZone": {
       "name": "指定海域",
       "help": "僅出擊指定的海域，可以用來獲取大世界成就星星\n自動更新的數值，填0可重置進度，重置後自動跳過已開荒的海域\n支援海域ID、國服/國際服/日服/台服海域名稱，例如 \"51\", \"NA海域東南E\", \"NA Ocean SE Sector E\"\n填入默認值0，或者刪除數值即可取消指定"
+    }
+  },
+  "HigherPriority": {
+    "_info": {
+      "name": "HigherPriority._info.name",
+      "help": "HigherPriority._info.help"
+    },
+    "Enable": {
+      "name": "HigherPriority.Enable.name",
+      "help": "HigherPriority.Enable.help"
     }
   },
   "OpsiHazard1Leveling": {
@@ -2943,6 +3476,68 @@
       "help": "GuildCoin.Record.help"
     }
   },
+  "ResearchPercent": {
+    "_info": {
+      "name": "ResearchPercent._info.name",
+      "help": "ResearchPercent._info.help"
+    },
+    "Value": {
+      "name": "ResearchPercent.Value.name",
+      "help": "ResearchPercent.Value.help"
+    },
+    "Limit": {
+      "name": "ResearchPercent.Limit.name",
+      "help": "ResearchPercent.Limit.help"
+    },
+    "Color": {
+      "name": "ResearchPercent.Color.name",
+      "help": "ResearchPercent.Color.help"
+    },
+    "Record": {
+      "name": "ResearchPercent.Record.name",
+      "help": "ResearchPercent.Record.help"
+    }
+  },
+  "PlayerLevel": {
+    "_info": {
+      "name": "PlayerLevel._info.name",
+      "help": "PlayerLevel._info.help"
+    },
+    "Value": {
+      "name": "PlayerLevel.Value.name",
+      "help": "PlayerLevel.Value.help"
+    },
+    "Color": {
+      "name": "PlayerLevel.Color.name",
+      "help": "PlayerLevel.Color.help"
+    },
+    "Record": {
+      "name": "PlayerLevel.Record.name",
+      "help": "PlayerLevel.Record.help"
+    }
+  },
+  "PlayerExp": {
+    "_info": {
+      "name": "PlayerExp._info.name",
+      "help": "PlayerExp._info.help"
+    },
+    "Value": {
+      "name": "PlayerExp.Value.name",
+      "help": "PlayerExp.Value.help"
+    },
+    "Limit": {
+      "name": "PlayerExp.Limit.name",
+      "help": "PlayerExp.Limit.help"
+    },
+    "Color": {
+      "name": "PlayerExp.Color.name",
+      "help": "PlayerExp.Color.help"
+    },
+    "Record": {
+      "name": "PlayerExp.Record.name",
+      "help": "PlayerExp.Record.help"
+    }
+  },
   "AutoRestart": {
     "_info": {
       "name": "AutoRestart._info.name",
@@ -2959,6 +3554,28 @@
     "NotifyWhenAutoRestart": {
       "name": "AutoRestart.NotifyWhenAutoRestart.name",
       "help": "AutoRestart.NotifyWhenAutoRestart.help"
+    }
+  },
+  "InstanceRestart": {
+    "_info": {
+      "name": "InstanceRestart._info.name",
+      "help": "InstanceRestart._info.help"
+    },
+    "Enabled": {
+      "name": "InstanceRestart.Enabled.name",
+      "help": "InstanceRestart.Enabled.help"
+    },
+    "AttemptsToRestart": {
+      "name": "InstanceRestart.AttemptsToRestart.name",
+      "help": "InstanceRestart.AttemptsToRestart.help"
+    },
+    "NotifyWhenAutoRestart": {
+      "name": "InstanceRestart.NotifyWhenAutoRestart.name",
+      "help": "InstanceRestart.NotifyWhenAutoRestart.help"
+    },
+    "HasRestarted": {
+      "name": "InstanceRestart.HasRestarted.name",
+      "help": "InstanceRestart.HasRestarted.help"
     }
   },
   "Storage": {
@@ -3039,6 +3656,9 @@
       "Medal": "勳章",
       "Core": "覈心數據",
       "GuildCoin": "艦隊幣",
+      "ResearchPercent": "Gui.Overview.ResearchPercent",
+      "PlayerLevel": "Gui.Overview.PlayerLevel",
+      "PlayerExp": "Gui.Overview.PlayerExp",
       "Log": "日誌",
       "Running": "執行中",
       "Pending": "佇列中",
