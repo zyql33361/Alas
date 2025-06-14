@@ -3149,6 +3149,7 @@
   },
   "GGHandler": {
     "_info": {
+      "name": "GGHandler._info.name",
       "help": "GGHandler._info.help"
     },
     "Enabled": {
@@ -3248,6 +3249,8 @@
     }
   },
   "Oil": {
+    "_info": {
+      "name": "Oil._info.name",
       "help": "Oil._info.help"
     },
     "Value": {
