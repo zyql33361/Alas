@@ -12,7 +12,7 @@ To add a new event, add a new row in here, and run `python -m module.config.conf
 
 **CN, EN, JP, TW** Event names in GUI. If an event is not aired on some servers, use `-`.
 
-| Aired Date | Directory                | Event Name                                   | CN                     | EN                                           | JP                                   | TW                       |
+| 20250417   | coalition 20230323       | Frostfall                                    | 极地风暴               | Frostfall                                    | 星霜海嵐       | Aired Date | Directory                | Event Name                                   | CN                     | EN                                           | JP                                   | TW                       |
 | :--------- | :----------------------- | :------------------------------------------- | :--------------------- | :------------------------------------------- | :----------------------------------- | :----------------------- |
 | 20170607   | war archives 20181020 en | Strive, Wish, and Strategize                 | 努力、希望和计划       | Strive, Wish, and Strategize                 | 努力、希望と計画                     | 努力、希望和計劃         |
 | 20170802   | war archives 20191031 en | Divergent Chessboard                         | 异色格                 | Divergent Chessboard                         | 鏡写されし異色                       | 異色格                   |
