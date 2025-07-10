@@ -18,19 +18,6 @@
       "GemsFarming"
     ]
   },
-  "ResearchFarming": {
-    "menu": "collapse",
-    "page": "setting",
-    "tasks": [
-      "ResearchFarmingSetting",
-      "ResearchFarm",
-      "ResearchFarm2",
-      "ResearchFarm3",
-      "ResearchFarm4",
-      "ResearchFarm5",
-      "ResearchFarm6"
-    ]
-  },
   "Event": {
     "menu": "collapse",
     "page": "setting",
