@@ -227,47 +227,11 @@ class UI(InfoHandler):
         logger.critical("Please switch to a supported page before starting Alas")
         raise GamePageUnknownError
 
-    def update_player_info(self):
-        self.ui_goto_old(page_player)
-
-        img = self.device.screenshot()
-
-        level_ocr = Ocr(buttons=OCR_PLAYER_LEVEL)
-        level_res = level_ocr.ocr(img)
-        exp_ocr = Ocr(buttons=OCR_PLAYER_EXP)
-        exp_res = exp_ocr.ocr(img)
-
-        if isinstance(level_res, str):
-            level_str = level_res.replace(".", "").lower().replace("lv", "")
-            if level_str.isdigit():
-                LogRes(config=self.config).PlayerLevel = {
-                    "Value": int(level_str)
-                }
-
-        if isinstance(exp_res, str):
-            exp_info = exp_res.split("/")
-            if len(exp_info) == 2:
-                curr_exp, exp_limit = exp_info[0], exp_info[1]
-                if curr_exp.isdigit() and exp_limit.isdigit():
-                    LogRes(config=self.config).PlayerExp = {
-                        "Value": int(curr_exp),
-                        "Limit": int(exp_limit)
-                    }
-
-        self.config.save(self.config.config_name)
-
-    def ui_goto(self, destination, *args, **kwargs):
-        player_info_last_updated_time = deep_get(self.config.data, "Dashboard.PlayerExp.Record")
-        now = datetime.now()
-        if now >= player_info_last_updated_time + timedelta(hours=24):
-            self.update_player_info()
-
-        self.ui_goto_old(destination, *args, **kwargs)
-
-    def ui_goto_old(self, destination, offset=(30, 30), skip_first_screenshot=True):
+    def ui_goto(self, destination, get_ship=True, offset=(30, 30), skip_first_screenshot=True):
         """
         Args:
             destination (Page):
+            get_ship:
             offset:
             skip_first_screenshot:
         """
@@ -309,7 +273,7 @@ class UI(InfoHandler):
                 continue
 
             # Additional
-            if self.ui_additional():
+            if self.ui_additional(get_ship=get_ship):
                 continue
 
         # Reset connection
@@ -503,6 +467,9 @@ class UI(InfoHandler):
     def ui_additional(self, get_ship=True):
         """
         Handle all annoying popups during UI switching.
+
+        Args:
+            get_ship:
         """
         # Popups appear at page_os
         # Has a popup_confirm variant
