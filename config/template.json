@@ -2009,8 +2009,8 @@
       "ServerUpdate": "00:00"
     },
     "Awaken": {
-      "Favourite": false,
-      "LevelCap": "level120"
+      "LevelCap": "level120",
+      "Favourite": false
     },
     "Storage": {
       "Storage": {}
