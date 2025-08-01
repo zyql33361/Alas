@@ -18,7 +18,7 @@ jobs:
 
       - name: Add Upstream Remote
         run: |
-          git remote add upstream https://gitee.com/zyql33361/backups.git
+          git remote add upstream https://github.com/LmeSzinc/AzurLaneAutoScript.git
           git fetch upstream
 
       - name: Set Local Timezone
