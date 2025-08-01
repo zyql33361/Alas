@@ -1,0 +1,56 @@
+name: Sync Upstream
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小时运行
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add Upstream Remote
+        run: |
+          git remote add upstream https://gitee.com/zyql33361/backups.git
+          git fetch upstream
+
+      - name: Set Local Timezone
+        run: sudo timedatectl set-timezone Asia/Shanghai
+
+      - name: Check for Updates
+        id: check-updates
+        run: |
+          if git merge-base --is-ancestor upstream/master master; then
+            echo "status=no-updates" >> $GITHUB_OUTPUT
+          else
+            echo "status=updates-available" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Merge Upstream (if updates available)
+        if: steps.check-updates.outputs.status == 'updates-available'
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@users.noreply.github.com"
+          git checkout master
+          
+          CURRENT_DATE="$(date +'%Y-%m-%dT%H:%M:%S %z')"
+          export GIT_COMMITTER_DATE="$CURRENT_DATE"
+          
+          git merge -X theirs upstream/master --allow-unrelated-histories
+          
+          git commit --amend --no-edit --date="$CURRENT_DATE"
+          
+          git push origin master --force
+
+      - name: Skip Merge (no updates)
+        if: steps.check-updates.outputs.status == 'no-updates'
+        run: |
+          echo "✅ 上游没有新提交，跳过合并操作"
+          date  # 显示当前时间用于验证
